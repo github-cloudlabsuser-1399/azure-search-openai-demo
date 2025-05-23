@@ -36,7 +36,9 @@ from openai.types.chat import (
 from approaches.promptmanager import PromptManager
 from core.authentication import AuthenticationHelper
 
-
+# The Document class represents a single search result or knowledge base document.
+# It includes metadata such as id, content, category, source information, security groups, captions, and scoring.
+# The serialize_for_results method prepares the document for output, converting complex fields to serializable formats.
 @dataclass
 class Document:
     id: Optional[str] = None
@@ -50,7 +52,9 @@ class Document:
     score: Optional[float] = None
     reranker_score: Optional[float] = None
     search_agent_query: Optional[str] = None
-
+    
+    # Prepares the document for output by converting its fields into a serializable dictionary.
+    # Handles complex fields like captions by converting them into lists of dictionaries.
     def serialize_for_results(self) -> dict[str, Any]:
         result_dict = {
             "id": self.id,
